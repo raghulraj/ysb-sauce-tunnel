@@ -41,6 +41,7 @@ SauceTunnel.prototype.openTunnel = function(callback) {
 
   var executable = binaries[platform];
   if (!executable) {
+    console.log("Platform:"+platform+" is not supported");
     throw new Error(platform + ' platform is not supported');
   }
   var args = ['-u', this.user, '-k', this.key];
@@ -51,12 +52,14 @@ SauceTunnel.prototype.openTunnel = function(callback) {
     args = args.concat(this.extraFlags);
   }
   var cmd = path.join(__dirname, 'vendor', platform, 'bin/', executable);
-
+  console.log("CMD:"+cmd);
+  console.log("ARGS:"+args);
   this.proc = proc.spawn(cmd, args);
   callback.called = false;
 
   this.proc.stdout.pipe(split()).on('data', function(data) {
     if (!data.match(/^\[-u,/g)) {
+      console.log("DATA:"+data);
       me.emit('verbose:debug', data);
     }
     if (data.match(/Sauce Connect is up, you may start your tests/)) {
