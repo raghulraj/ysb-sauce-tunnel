@@ -54,7 +54,7 @@ SauceTunnel.prototype.openTunnel = function(callback) {
   var cmd = path.join(__dirname, 'vendor', platform, 'bin/', executable);
   console.log("CMD:"+cmd);
   console.log("ARGS:"+args);
-  this.proc = proc.spawn(cmd, args);
+  this.proc = proc.spawn(cmd, args,{ shell: true });
   callback.called = false;
 
   this.proc.stdout.pipe(split()).on('data', function(data) {
