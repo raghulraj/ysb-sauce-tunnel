@@ -1,6 +1,6 @@
 {
   "name": "ysb-sauce-tunnel",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A wrapper around the Sauce Labs tunnel jar",
   "main": "index.js",
   "scripts": {
